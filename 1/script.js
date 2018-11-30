@@ -1,38 +1,32 @@
 //1
-
-function name(name) {
-    return name;
-}
-
-const m = [];
-
 function loop(times = 0, callback = null) {
 
-    if (callback != null) {
+    if (typeof callback === 'function') {
         for (let i = 0; i < times; i++ ) {
-            m.push(`${callback} - ${i}`);
+            callback();
         }
     }
-    console.log(m);
+
 }
 
-loop(3, name('Dmitriy'));
+loop(3, () => console.log('Name'));
 
 
-//2 
-
+//2
 function calculateArea(side) {
-    let area = side*side;
-    let figure = 'cube';
+        const area = side*side;
+    const figure = 'cube';
     let input = `Сторона - ${side}`;
-    return { area, figure, input };
+    return { area,
+        figure,
+        input
+    };
 }
 
 console.log(calculateArea(4));
 
 
 //3
-
 class Human {
     constructor(name, age, dateOfBirth) {
         this.name = name;
@@ -57,17 +51,33 @@ class Employee extends Human {
 }
 
 class Developer extends Employee {
+    constructor(name, age, dateOfBirth, salary, department) {
+        super(name, age, dateOfBirth, salary, department);
+        this.manager;
+    }
 
+    get manager() {
+        return this.manager;
+    }
+    set manager(manager) {
+        this.manager = manager;
+    }
 }
 
 class Manager extends Employee {
 
-    constructor(name,age, dateOfBirth) {
-        super(name,age, dateOfBirth);
-
+    constructor(name, age, dateOfBirth, salary, department) {
+        super(name, age, dateOfBirth, salary, department);
+        this.developers = [];
     }
 
+    newDeveloper(developer) {
+        this.developers.push(developer);
+    }
 
+    removeDeveloper(developer) {
+        this.developers = this.developers.filter(dev => dev !== developer);
+    }
 
 
 }
@@ -77,7 +87,6 @@ console.log(me.displayInfo());
 
 
 // 4
-
 function* generator() {
     let name = prompt('name?');
     yield;
